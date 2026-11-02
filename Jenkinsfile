@@ -12,15 +12,18 @@ pipeline {
 
         stage('Build Frontend') {
             steps {
-                bat 'npm install'
-                bat 'npm run build'
+                sh 'node --version'
+                sh 'npm --version'
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
 
         stage('Build Backend') {
             steps {
                 dir('backend/backend') {
-                    bat 'mvnw.cmd clean package -DskipTests'
+                    sh 'chmod +x mvnw'
+                    sh './mvnw clean package -DskipTests'
                 }
             }
         }
