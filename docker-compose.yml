@@ -1,0 +1,19 @@
+
+services:
+  backend:
+    image: queueless-backend:latest
+    container_name: queueless-backend-container
+    ports:
+      - "8081:8081"
+    environment:
+      DB_PASSWORD: ${DB_PASSWORD}
+    restart: unless-stopped
+
+  frontend:
+    image: queueless-frontend:latest
+    container_name: queueless-frontend-container
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
