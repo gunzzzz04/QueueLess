@@ -1,4 +1,5 @@
 
+
 pipeline {
     agent any
 
@@ -24,6 +25,20 @@ pipeline {
                 dir('backend/backend') {
                     sh 'chmod +x mvnw'
                     sh './mvnw clean package -DskipTests'
+                }
+            }
+        }
+
+        stage('Docker Build Frontend') {
+            steps {
+                sh 'docker build -t queueless-frontend:latest .'
+            }
+        }
+
+        stage('Docker Build Backend') {
+            steps {
+                dir('backend/backend') {
+                    sh 'docker build -t queueless-backend:latest .'
                 }
             }
         }
