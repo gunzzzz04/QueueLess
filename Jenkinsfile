@@ -20,14 +20,23 @@ pipeline {
             }
         }
 
-        stage('Build Backend') {
-            steps {
-                dir('backend/backend') {
-                    sh 'chmod +x mvnw'
-                    sh './mvnw clean package -DskipTests'
-                }
+        
+stage('Build Backend') {
+    steps {
+        dir('backend/backend') {
+            withCredentials([string(
+                credentialsId: 'DB_PASSWORD',
+                variable: 'DB_PASSWORD'
+            )]) {
+                sh '''
+                    chmod +x mvnw
+                    ./mvnw clean package
+                '''
             }
         }
+    }
+}
+
 
         stage('Docker Build Frontend') {
             steps {
