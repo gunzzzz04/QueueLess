@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -46,6 +47,7 @@ pipeline {
             steps {
                 sh '''
                     docker rm -f queueless-frontend-container || true
+
                     docker run -d \
                     --name queueless-frontend-container \
                     --restart unless-stopped \
@@ -57,14 +59,21 @@ pipeline {
 
         stage('Deploy Backend') {
             steps {
-                sh '''
-                    docker rm -f queueless-backend-container || true
-                    docker run -d \
-                    --name queueless-backend-container \
-                    --restart unless-stopped \
-                    -p 8081:8081 \
-                    queueless-backend:latest
-                '''
+                withCredentials([string(
+                    credentialsId: 'DB_PASSWORD',
+                    variable: 'DB_PASSWORD'
+                )]) {
+                    sh '''
+                        docker rm -f queueless-backend-container || true
+
+                        docker run -d \
+                        --name queueless-backend-container \
+                        --restart unless-stopped \
+                        -p 8081:8081 \
+                        -e DB_PASSWORD="$DB_PASSWORD" \
+                        queueless-backend:latest
+                    '''
+                }
             }
         }
     }
