@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import "./AdminDashboard.css";
 
-const TOKEN_API = "http://localhost:8081/api/tokens";
-const APPOINTMENT_API = "http://localhost:8081/api/appointments";
+const TOKEN_API = "https://queueless-backend-y9j3.onrender.com/api/tokens";
+const APPOINTMENT_API = "https://queueless-backend-y9j3.onrender.com/api/appointments";
 
 export default function AdminDashboard() {
     const [tokens, setTokens] = useState([]);

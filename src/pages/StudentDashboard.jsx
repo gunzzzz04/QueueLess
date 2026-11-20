@@ -30,7 +30,7 @@ export default function StudentDashboard() {
 
         try {
             const response = await fetch(
-                "http://localhost:8081/api/tokens",
+                "https://queueless-backend-y9j3.onrender.com/api/tokens",
                 {
                     method: "POST",
                     headers: {
@@ -48,7 +48,7 @@ export default function StudentDashboard() {
             const data = await response.json();
 
             const queueResponse = await fetch(
-                `http://localhost:8081/api/tokens/${data.id}/queue-status`
+                `https://queueless-backend-y9j3.onrender.com/api/tokens/${data.id}/queue-status`
             );
 
             if (!queueResponse.ok) {
@@ -85,7 +85,7 @@ export default function StudentDashboard() {
         const interval = setInterval(async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:8081/api/tokens/${tokenId}/queue-status`
+                    `https://queueless-backend-y9j3.onrender.com/api/tokens/${tokenId}/queue-status`
                 );
 
                 if (!response.ok) return;
@@ -129,7 +129,7 @@ export default function StudentDashboard() {
 
         try {
             const response = await fetch(
-                "http://localhost:8081/api/appointments",
+                "https://queueless-backend-y9j3.onrender.com/api/appointments",
                 {
                     method: "POST",
                     headers: {
