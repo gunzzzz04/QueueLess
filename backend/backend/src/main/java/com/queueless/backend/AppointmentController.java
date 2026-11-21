@@ -14,8 +14,8 @@ import java.util.Map;
 @RequestMapping("/api/appointments")
 @CrossOrigin(origins = {
         "http://localhost:5173",
-        "http://localhost:3000"
-	"https://queueless-topaz.vercel.app"
+        "http://localhost:3000",
+        "https://queueless-topaz.vercel.app"
 })
 public class AppointmentController {
 
